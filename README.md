@@ -22,7 +22,7 @@ Given a set of N objects. A union-find class includes:
 ### Quick Find - An eager approach
 
 <p align="center">
-    <img src="./res/QF.png" alt="percolation" width="75%"/>
+    <img src="./res/UF.png" alt="UF" width="75%"/>
 </p>
 
 In quick union, we need an array to keep nodes' locations. For each node `i`, the array `id[i]` keeps where the node `i`
@@ -47,8 +47,8 @@ true // array[0] == array[2]
 ### Quick Union - A lazy approach
 
 <p align="center">
-    <img src="./res/QU1.png" alt="percolation" width="75%"/>
-    <img src="./res/QU2.png" alt="percolation" width="75%"/>
+    <img src="./res/QU1.png" alt="QU1" width="75%"/>
+    <img src="./res/QU2.png" alt="QU2" width="75%"/>
 </p>
 
 Quick-find is too slow for huge problems. An alternative is called quick union. In quick union, we need an array to keep
