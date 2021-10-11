@@ -21,9 +21,13 @@ Given a set of N objects. A union-find class includes:
 
 ### Quick Find - An eager approach
 
-![QF]
+<p align="center">
+    <img src="./res/QF.png" alt="percolation" width="75%"/>
+</p>
 
-In quick union, we need an array to keep nodes' locations. For each node `i`, the array `id[i]` keeps where the node `i` points to. When node p unions to q, we must loop the array and replace all the values that equal to `id[p]` with `id[q]`.
+In quick union, we need an array to keep nodes' locations. For each node `i`, the array `id[i]` keeps where the node `i`
+points to. When node p unions to q, we must loop the array and replace all the values that equal to `id[p]` with `id[q]`
+.
 
 Example 1
 
@@ -42,12 +46,15 @@ true // array[0] == array[2]
 
 ### Quick Union - A lazy approach
 
-![QU1]
-![QU1]
+<p align="center">
+    <img src="./res/QU1.png" alt="percolation" width="75%"/>
+    <img src="./res/QU2.png" alt="percolation" width="75%"/>
+</p>
 
-Quick-find is too slow for huge problems. An alternative is called quick union. In quick union, we need an array to keep nodes' locations. For each node `i`, the array `id[i]` keeps where the node `i` points to. E.g., `id[0] = 0` means the node `0` has no parents. `id[3] = 9` means the node `3` is pointing to the node `9`. When node p points to node q, the root of p points to the root of q.
-
-E.g.,
+Quick-find is too slow for huge problems. An alternative is called quick union. In quick union, we need an array to keep
+nodes' locations. For each node `i`, the array `id[i]` keeps where the node `i` points to. E.g., `id[0] = 0` means the
+node `0` has no parents. `id[3] = 9` means the node `3` is pointing to the node `9`. When node p points to node q, the
+root of p points to the root of q. E.g.,
 
 ```
    i    0  1  2  3  4  5  6  7  8  9
@@ -65,13 +72,18 @@ The roots of 3 and 7 are both 6.
 | Quick Union |     N      |   N   |   N   |
 | Weighted QU |     N      | log N | log N |
 
-If the tree becomes flatter, the cost of find in the quick union will be less. Weighted quick union is an improvement of the quick union. Instead of joining the root of p to the root of q, it compares the size of trees where p and q are and merge the root with a smaller tree to the other root.
+If the tree becomes flatter, the cost of find in the quick union will be less. Weighted quick union is an improvement of
+the quick union. Instead of joining the root of p to the root of q, it compares the size of trees where p and q are and
+merge the root with a smaller tree to the other root.
 
 ### Percolation
 
-![percolation]
+<p align="center">
+    <img src="./res/percolation.png" alt="percolation" width="75%"/>
+</p>
 
-The Union-Find is a model for many physical systems, specifically, systems percolates iff top and bottom are connected by open sites.
+The Union-Find is a model for many physical systems, specifically, systems percolates iff top and bottom are connected
+by open sites.
 
 [programming assignment: percolation]
 
@@ -79,9 +91,5 @@ The Union-Find is a model for many physical systems, specifically, systems perco
 
 -   [Algorithms, Part 1]
 
-[uf]: ./res/UF.png
-[qu1]: ./res/QU1.png
-[qu2]: ./res/QU2.png
-[percolation]: ./res/percolation.png
 [algorithms, part 1]: https://www.coursera.org/learn/algorithms-part1/home/welcome
 [programming assignment: percolation]: https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php
