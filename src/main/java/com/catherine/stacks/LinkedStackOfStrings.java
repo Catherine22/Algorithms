@@ -3,7 +3,7 @@ package com.catherine.stacks;
 /**
  * @author : Catherine
  */
-public class LinkedStackOfStrings extends MyStack {
+public class LinkedStackOfStrings extends StackOfStrings {
     private static class Node {
         String item;
         Node next;
