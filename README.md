@@ -87,6 +87,9 @@ by open sites.
 
 [programming assignment: percolation]
 
+## Stack
+
+
 ## References
 
 -   [Algorithms, Part 1]

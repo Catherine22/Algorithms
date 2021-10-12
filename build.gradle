@@ -1,7 +1,7 @@
 plugins {
     id 'java'
-    // execute "./gradlew check" to run SpotBugs.
-    id "com.github.spotbugs" version "5.0.0-beta.2"
+    id "com.github.spotbugs" version "5.0.0-beta.3"
+    id 'checkstyle'
 }
 
 group 'com.catherine'
@@ -12,10 +12,23 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.junit.jupiter:junit-jupiter:5.7.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
 
 test {
     useJUnitPlatform()
+}
+
+checkstyle {
+    toolVersion '7.8.1'
+    configFile file("config/checkstyle/checkstyle.xml")
+    configProperties = ["suppressionFile": 'config/checkstyle/suppressions.xml']
+}
+checkstyleMain {
+    source = 'src/main/java'
+}
+checkstyleTest {
+    source = 'src/test/java'
 }

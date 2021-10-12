@@ -2,7 +2,6 @@ package com.catherine.dynamicconnectivity;
 
 /**
  * @author : Catherine
- * @created : 09/10/2021
  */
 public class QuickFind implements UF {
     private final int[] id;
@@ -15,7 +14,7 @@ public class QuickFind implements UF {
     }
 
     /**
-     * Replace id[p] to id[q] as well as elements that shared the same value with id[p]
+     * Replace id[p] to id[q] as well as elements that shared the same value with id[p].
      *
      * @param p
      * @param q

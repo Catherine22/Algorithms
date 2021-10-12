@@ -2,7 +2,6 @@ package com.catherine.dynamicconnectivity;
 
 /**
  * @author : Catherine
- * @created : 11/10/2021
  */
 public class WeightedQuickUnion implements UF {
     private final int[] id;
@@ -18,8 +17,8 @@ public class WeightedQuickUnion implements UF {
     }
 
     /**
-     * Chase parent pointers until reach root
-     * Deep of i array accesses
+     * Chase parent pointers until reach root.
+     * Deep of i array accesses.
      *
      * @param i
      * @return
@@ -58,8 +57,8 @@ public class WeightedQuickUnion implements UF {
     }
 
     /**
-     * Check if p and q have the same root
-     * Deep of p and q array accesses
+     * Check if p and q have the same root.
+     * Deep of p and q array accesses.
      *
      * @param p
      * @param q
