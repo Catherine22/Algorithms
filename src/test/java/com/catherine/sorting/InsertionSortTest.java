@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 /**
  * @author : Catherine
- * @created : 27/09/2021
  */
 class InsertionSortTest {
     InsertionSort<Integer> context = new InsertionSort<>();

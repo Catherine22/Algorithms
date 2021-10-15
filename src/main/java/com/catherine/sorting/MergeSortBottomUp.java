@@ -4,24 +4,21 @@ package com.catherine.sorting;
 import java.util.Arrays;
 
 /**
+ * Merge sort without recursion
+ *
  * @param <T>
  * @author : Catherine
  */
-public class MergeSort<T extends Comparable<? super T>> {
+public class MergeSortBottomUp<T extends Comparable<? super T>> {
 
     public void sort(Comparable<T> a[]) {
         Comparable<T>[] aux = Arrays.copyOf(a, a.length);
-        sort(a, aux, 0, a.length - 1);
-    }
-
-    private void sort(Comparable<T> a[], Comparable<T> aux[], int lo, int hi) {
-        if (hi <= lo) {
-            return;
+        int N = a.length;
+        for (int sz = 1; sz < a.length; sz = sz + sz) {
+            for (int lo = 0; lo < (N - sz); lo += sz + sz) {
+                merge(a, aux, lo, lo + sz - 1, Math.min(lo + sz + sz - 1, N - 1));
+            }
         }
-        int mid = (lo + hi) / 2;
-        sort(a, aux, lo, mid);
-        sort(a, aux, mid + 1, hi);
-        merge(a, aux, lo, mid, hi);
     }
 
     /**
@@ -33,7 +30,7 @@ public class MergeSort<T extends Comparable<? super T>> {
      * I.e., a[lo] - a[mid] and a[mid + 1] to a[hi]
      *
      * @param a   the original array, this array will be sorted
-     * @param aux the auxiliary array, a copy of the original array a
+     * @param aux the auxiliary array, an empty array
      * @param lo  the lowest position
      * @param mid the middle position
      * @param hi  the highest position

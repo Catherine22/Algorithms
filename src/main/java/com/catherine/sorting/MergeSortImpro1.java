@@ -4,10 +4,13 @@ package com.catherine.sorting;
 import java.util.Arrays;
 
 /**
+ * An improvement of merge sort using insertion sort
+ *
  * @param <T>
  * @author : Catherine
  */
-public class MergeSort<T extends Comparable<? super T>> {
+public class MergeSortImpro1<T extends Comparable<? super T>> {
+    private final static int CUTOFF = 7;
 
     public void sort(Comparable<T> a[]) {
         Comparable<T>[] aux = Arrays.copyOf(a, a.length);
@@ -15,7 +18,8 @@ public class MergeSort<T extends Comparable<? super T>> {
     }
 
     private void sort(Comparable<T> a[], Comparable<T> aux[], int lo, int hi) {
-        if (hi <= lo) {
+        if (hi <= lo + CUTOFF - 1) {
+//            InsertionSort.sort(a, lo, hi);
             return;
         }
         int mid = (lo + hi) / 2;

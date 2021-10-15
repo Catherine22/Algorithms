@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 /**
  * @author : Catherine
- * @created : 27/09/2021
  */
 class BubbleSortTest {
     BubbleSort<Integer> context = new BubbleSort<>();

@@ -4,10 +4,12 @@ package com.catherine.sorting;
 import java.util.Arrays;
 
 /**
+ * An improvement of merge sort helps with partially-ordered subarrays
+ *
  * @param <T>
  * @author : Catherine
  */
-public class MergeSort<T extends Comparable<? super T>> {
+public class MergeSortImpro2<T extends Comparable<? super T>> {
 
     public void sort(Comparable<T> a[]) {
         Comparable<T>[] aux = Arrays.copyOf(a, a.length);
@@ -21,6 +23,9 @@ public class MergeSort<T extends Comparable<? super T>> {
         int mid = (lo + hi) / 2;
         sort(a, aux, lo, mid);
         sort(a, aux, mid + 1, hi);
+        if (a[mid].compareTo((T) a[mid + 1]) <= 0) {
+            return;
+        }
         merge(a, aux, lo, mid, hi);
     }
 

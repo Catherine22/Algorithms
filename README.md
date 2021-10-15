@@ -9,6 +9,13 @@
     - [Quick Union - A lazy approach](#quick-union---a-lazy-approach)
     - [Improving quick find and quick union](#improving-quick-find-and-quick-union)
     - [Percolation](#percolation)
+  - [Stack](#stack)
+  - [Queue](#queue)
+  - [Sorting](#sorting)
+    - [Merge Sort](#merge-sort)
+      - [Merge sort with insertion sort](#merge-sort-with-insertion-sort)
+      - [Merge sort with partially-ordered arrays](#merge-sort-with-partially-ordered-arrays)
+      - [Bottom-up merge sort](#bottom-up-merge-sort)
   - [References](#references)
 
 ## Dynamic connectivity
@@ -89,6 +96,100 @@ by open sites.
 
 ## Stack
 
+[Stacks]
+
+## Queue
+
+[Queues]
+
+## Sorting
+
+| Algorithm  |  Best case  | Worst case  |   Average   |
+| :--------: | :---------: | :---------: | :---------: |
+| Merge Sort | O(n log(n)) | O(n log(n)) | O(n log(n)) |
+
+### Merge Sort
+
+[MergeSort.java]
+
+Merge sort is com used as a primary sorting method in programming languages.
+
+#### Merge sort with insertion sort
+
+Merge sort is too expensive for tiny arrays and has too much overhead for tiny subarrays. An improvement of merge sort is to cut off and use insertion sort to sort for tiny subarrays.
+
+For example, in [MergeSort.java], we have the following code:
+
+```Java
+private void sort(Comparable<T> a[], Comparable<T> aux[], int lo, int hi) {
+    if (hi <= lo) {
+        return;
+    }
+    int mid = (lo + hi) / 2;
+    sort(a, aux, lo, mid);
+    sort(a, aux, mid + 1, hi);
+    merge(a, aux, lo, mid, hi);
+}
+```
+
+With insertion sort, it becomes:
+
+```Java
+private final static int CUTOFF = 7;
+private void sort(Comparable<T> a[], Comparable<T> aux[], int lo, int hi) {
+    if (hi <= lo + CUTOFF - 1) {
+        InsertionSort.sort(a, lo, hi);
+        return;
+    }
+    int mid = (lo + hi) / 2;
+    sort(a, aux, lo, mid);
+    sort(a, aux, mid + 1, hi);
+    merge(a, aux, lo, mid, hi);
+}
+```
+
+#### Merge sort with partially-ordered arrays
+
+Another approach to improve merge sort is to stop sorting when subarrays are partially sorted.
+
+```Java
+private void sort(Comparable<T> a[], Comparable<T> aux[], int lo, int hi) {
+    if (hi <= lo) {
+        return;
+    }
+    int mid = (lo + hi) / 2;
+    sort(a, aux, lo, mid);
+    sort(a, aux, mid + 1, hi);
+    if (a[mid].compareTo((T) a[mid + 1]) <= 0) {
+        return;
+    }
+    merge(a, aux, lo, mid, hi);
+}
+```
+
+#### Bottom-up merge sort
+
+Merge sort can be done without recursion. That version of merge sort is called bottom-up merge sort. It works as follows:
+
+```
+[4, 2, 6, 8, 1, 5, 3, 9]
+ ----
+[2, 4, 6, 8, 1, 5, 3, 9]
+       ----
+[2, 4, 6, 8, 1, 5, 3, 9]
+             ----
+[2, 4, 6, 8, 1, 5, 3, 9]
+                   ----
+[2, 4, 6, 8, 1, 5, 3, 9]
+ ----------
+[2, 4, 6, 8, 1, 5, 3, 9]
+             ----------
+[2, 4, 6, 8, 1, 3, 5, 9]
+ ----------------------
+[1, 2, 3, 4, 5, 6, 8, 9]
+```
+
+Check out [MergeSortBottomUp.java] to see if it works.
 
 ## References
 
@@ -96,3 +197,7 @@ by open sites.
 
 [algorithms, part 1]: https://www.coursera.org/learn/algorithms-part1/home/welcome
 [programming assignment: percolation]: https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php
+[stacks]: ./main/src/main/java/com/catherine/stacks/
+[queues]: ./main/src/main/java/com/catherine/queues/
+[mergesort.java]: /main/src/main/java/com/catherine/sorting/MergeSort.java
+[mergesortbottomup.java]: /main/src/main/java/com/catherine/sorting/MergeSortBottomUp.java
