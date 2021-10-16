@@ -16,6 +16,7 @@
       - [Merge sort with insertion sort](#merge-sort-with-insertion-sort)
       - [Merge sort with partially-ordered arrays](#merge-sort-with-partially-ordered-arrays)
       - [Bottom-up merge sort](#bottom-up-merge-sort)
+    - [Quick Sort](#quick-sort)
   - [References](#references)
 
 ## Dynamic connectivity
@@ -169,7 +170,7 @@ private void sort(Comparable<T> a[], Comparable<T> aux[], int lo, int hi) {
 
 #### Bottom-up merge sort
 
-Merge sort can be done without recursion. That version of merge sort is called bottom-up merge sort. It works as follows:
+An implementation of the merge sort without recursion is called the bottom-up merge sort. It works as follows:
 
 ```
 [4, 2, 6, 8, 1, 5, 3, 9]
@@ -190,6 +191,26 @@ Merge sort can be done without recursion. That version of merge sort is called b
 ```
 
 Check out [MergeSortBottomUp.java] to see if it works.
+
+### Quick Sort
+
+In quick sort, we have a function called `partition`, where we have two pointers, `i` and `j`, and `lo` refers to the lowest element. We start from `i = lo + 1`, ensuring that all elements between `i` and `j` are lesser than `a[lo]`. `j`, on the other hand, is initially equal to`hi` (the highest element). We ensure the subarray ranged from `j` to `hi` is greater than `a[lo]`. We stop the above checking while `j` is less than or equal to `i`. Then we exchange `a[lo]` and `a[j]`.
+
+Below shows how partition works:
+
+```
+before
+[x|                       ]
+[l]                     [j]
+
+during
+[x| <=x  |       |   >=x  ]
+        [i]     [j]       ]
+
+after
+[    <=x    |x|    >=x    ]
+[l]         [j]         [h]
+```
 
 ## References
 
