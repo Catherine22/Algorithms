@@ -7,7 +7,8 @@ import java.util.List;
 /**
  * @author : Catherine
  */
-public class QuickSort<T extends Comparable<? super T>> {
+public class QuickSortImpro1<T extends Comparable<? super T>> {
+    private final static int CUTOFF = 10;
 
     public void sort(T[] a) {
         // shuffle is needed for performance guarantee
@@ -16,7 +17,8 @@ public class QuickSort<T extends Comparable<? super T>> {
     }
 
     private void sort(T[] a, int lo, int hi) {
-        if (hi <= lo) {
+        if (hi <= lo + CUTOFF - 1) {
+//            InsertionSort.sort(a, lo, hi);
             return;
         }
 
@@ -26,15 +28,6 @@ public class QuickSort<T extends Comparable<? super T>> {
     }
 
 
-    /**
-     * Given an array a, its lowest position and highest position and return j
-     * such that we partition the array into [j][ <= j ][ >= j ].
-     *
-     * @param a
-     * @param lo
-     * @param hi
-     * @return
-     */
     private int partition(T[] a, int lo, int hi) {
         int i = lo;
         int j = hi + 1;

@@ -1,5 +1,7 @@
 package com.catherine.sorting;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -11,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 class InsertionSortTest {
     InsertionSort<Integer> context = new InsertionSort<>();
 
-    @org.junit.jupiter.api.Test
+    @Test
     void sort() {
         Integer[] a1 = {4, 2, 7, 1, 4, 9, 4, 3};
         Integer[] sortedA1 = Arrays.copyOf(a1, a1.length);

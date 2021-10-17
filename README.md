@@ -17,6 +17,9 @@
       - [Merge sort with partially-ordered arrays](#merge-sort-with-partially-ordered-arrays)
       - [Bottom-up merge sort](#bottom-up-merge-sort)
     - [Quick Sort](#quick-sort)
+      - [Quick sort with insertion sort](#quick-sort-with-insertion-sort)
+      - [Estimating the partition](#estimating-the-partition)
+    - [Selection](#selection)
   - [References](#references)
 
 ## Dynamic connectivity
@@ -108,6 +111,7 @@ by open sites.
 | Algorithm  |  Best case  | Worst case  |   Average   |
 | :--------: | :---------: | :---------: | :---------: |
 | Merge Sort | O(n log(n)) | O(n log(n)) | O(n log(n)) |
+| Quick Sort | O(n log(n)) |   O(n^2)    | O(n log(n)) |
 
 ### Merge Sort
 
@@ -194,6 +198,8 @@ Check out [MergeSortBottomUp.java] to see if it works.
 
 ### Quick Sort
 
+[QuickSort.java]
+
 In quick sort, we have a function called `partition`, where we have two pointers, `i` and `j`, and `lo` refers to the lowest element. We start from `i = lo + 1`, ensuring that all elements between `i` and `j` are lesser than `a[lo]`. `j`, on the other hand, is initially equal to`hi` (the highest element). We ensure the subarray ranged from `j` to `hi` is greater than `a[lo]`. We stop the above checking while `j` is less than or equal to `i`. Then we exchange `a[lo]` and `a[j]`.
 
 Below shows how partition works:
@@ -212,6 +218,48 @@ after
 [l]         [j]         [h]
 ```
 
+It is noticeable that we must shuffle the array before actual partition and sorting to have a probabilistic guarantee against the worst case.
+
+#### Quick sort with insertion sort
+
+The way we add insertion sort to quicksort is the same as we do in merge sort. This time, the CUTOFF is 10.
+
+```Java
+private final static int CUTOFF = 10;
+private void sort(T[] a, int lo, int hi) {
+    if (hi <= lo + CUTOFF - 1) {
+        InsertionSort.sort(a, lo, hi);
+        return;
+    }
+
+    int j = partition(a, lo, hi); // j is the correct position, no need to check j again.
+    sort(a, lo, j - 1);
+    sort(a, j + 1, hi);
+}
+```
+
+#### Estimating the partition
+
+Another improvement of quicksort is to estimate the partitioning element being near the middle rather than arbitrarily use the first element, which, on average, will be at the middle. The method is to sample the items and take the median of the sample. This improvement is not usually worth the cost of enlarged samples. Three times can slightly reduce the number of comparisons and increase the number of exchanges paradoxically.
+
+```Java
+private void sort(T[] a, int lo, int hi) {
+    if (hi <= lo) {
+        return;
+    }
+
+    int m = medianOf3(a, lo, (lo + hi) / 2, hi);
+    exch(a, lo, m);
+    int j = partition(a, lo, hi); // j is the correct position, no need to check j again.
+    sort(a, lo, j - 1);
+    sort(a, j + 1, hi);
+}
+```
+
+### Selection
+
+1. Given an array of N items, find a kth smallest item.
+
 ## References
 
 -   [Algorithms, Part 1]
@@ -222,3 +270,8 @@ after
 [queues]: ./main/src/main/java/com/catherine/queues/
 [mergesort.java]: /main/src/main/java/com/catherine/sorting/MergeSort.java
 [mergesortbottomup.java]: /main/src/main/java/com/catherine/sorting/MergeSortBottomUp.java
+[quicksort.java]: /main/src/main/java/com/catherine/sorting/QuickSort.java
+
+```
+
+```

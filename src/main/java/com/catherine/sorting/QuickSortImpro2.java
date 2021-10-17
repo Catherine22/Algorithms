@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author : Catherine
  */
-public class QuickSort<T extends Comparable<? super T>> {
+public class QuickSortImpro2<T extends Comparable<? super T>> {
 
     public void sort(T[] a) {
         // shuffle is needed for performance guarantee
@@ -20,21 +20,14 @@ public class QuickSort<T extends Comparable<? super T>> {
             return;
         }
 
+        int m = medianOf3(a, lo, (lo + hi) / 2, hi);
+        exch(a, lo, m);
         int j = partition(a, lo, hi); // j is the correct position, no need to check j again.
         sort(a, lo, j - 1);
         sort(a, j + 1, hi);
     }
 
 
-    /**
-     * Given an array a, its lowest position and highest position and return j
-     * such that we partition the array into [j][ <= j ][ >= j ].
-     *
-     * @param a
-     * @param lo
-     * @param hi
-     * @return
-     */
     private int partition(T[] a, int lo, int hi) {
         int i = lo;
         int j = hi + 1;
@@ -76,5 +69,19 @@ public class QuickSort<T extends Comparable<? super T>> {
         List<T> l = Arrays.asList(a);
         Collections.shuffle(l);
         l.toArray(a);
+    }
+
+    // median = max(min(a,b), min(max(a,b),c));
+    private int medianOf3(T[] a, int p, int q, int r) {
+        // p <= q <= r OR p <= r <= q
+        if (a[p].compareTo(a[q]) <= 0 && a[p].compareTo(a[r]) <= 0) {
+            return a[q].compareTo(a[r]) <= 0 ? q : r;
+        }
+        // q <= r <= p OR r <= q <= p
+        if (a[p].compareTo(a[r]) >= 0 && a[p].compareTo(a[q]) >= 0) {
+            return a[q].compareTo(a[r]) >= 0 ? q : r;
+        }
+        // skip q <= p <= r OR r <= p <= q
+        return p;
     }
 }

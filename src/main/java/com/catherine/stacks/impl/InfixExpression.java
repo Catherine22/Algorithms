@@ -1,4 +1,4 @@
-package com.catherine.stacks;
+package com.catherine.stacks.impl;
 
 import java.util.Stack;
 
