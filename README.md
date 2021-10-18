@@ -19,7 +19,11 @@
     - [Quick Sort](#quick-sort)
       - [Quick sort with insertion sort](#quick-sort-with-insertion-sort)
       - [Estimating the partition](#estimating-the-partition)
-    - [Selection](#selection)
+    - [Heap Sort](#heap-sort)
+    - [Sorting in Practice](#sorting-in-practice)
+  - [Priority Queues](#priority-queues)
+    - [Binary Heaps](#binary-heaps)
+    - [Heap Sort](#heap-sort-1)
   - [References](#references)
 
 ## Dynamic connectivity
@@ -108,10 +112,9 @@ by open sites.
 
 ## Sorting
 
-| Algorithm  |  Best case  | Worst case  |   Average   |
-| :--------: | :---------: | :---------: | :---------: |
-| Merge Sort | O(n log(n)) | O(n log(n)) | O(n log(n)) |
-| Quick Sort | O(n log(n)) |   O(n^2)    | O(n log(n)) |
+<p align="center">
+    <img src="./res/sort.png" alt="sort" width="75%"/>
+</p>
 
 ### Merge Sort
 
@@ -256,9 +259,136 @@ private void sort(T[] a, int lo, int hi) {
 }
 ```
 
-### Selection
+### Heap Sort
+
+Check out [Heap Sort](#heap-sort-1).
+
+### Sorting in Practice
 
 1. Given an array of N items, find a kth smallest item.
+
+In this example, we simplify the partition method from quicksort by using one single pointer as follows:
+
+```
+before
+[                         ]
+[l]                     [h]
+
+after
+[    <=j    |j|    >=j    ]
+[l]         [k]         [h]
+```
+
+Check out [Selection.java]
+
+2. Huge numbers of duplicate keys
+
+The solution is to adopt 3-way partitioning. It is a little bit complicated than a standard partitioning method in quicksort.
+
+```
+before
+[v|                     ]
+[l]                    [h]
+duration
+[ < v | = v |     | > v ]
+      [lt]  [i]   [gt]
+after
+[  < v  |  = v  |  > v  ]
+[l]     [lt] [gt]     [h]
+```
+
+Check out [DuplicateKeys.java]
+
+## Priority Queues
+
+### Binary Heaps
+
+<p align="center">
+    <img src="./res/binary_heaps.png" alt="binary heaps" width="75%"/>
+</p>
+
+**Proposition**:
+
+-   Largest key is a[1], which is root of binary tree.
+-   Parent of node at k is at k/2.
+-   Children of node at k are at 2k and 2k+1.
+
+**Promotion in a heap**:
+
+Scenario: Child's key becomes larger key than its parent's key.
+
+To eliminate the violation, we have to exchange the key in the child with the key in the parent. After that exchange, check if the parent's key is larger than its parent. Finally, we repeat the exchange up to the root.
+
+**Demotion in a heap**:
+
+Scenario: Parent's key becomes smaller than one (or both) of its children's.
+
+To eliminate the violation, we have to exchange the parent's key with the child's key. After that exchange, check if the child's key is smaller than its children. If so, exchange the child's key and its' largest child's. Repeat the exchange until the heap order resorted.
+
+Check out [BinaryHeap.java].
+
+### Heap Sort
+
+Implementation of the binary heap is heap sort. In heap sort, we exchange the root (the max value) with the last node, remove the old root and sink the new root until finding the second largest value. Then we repeat those three steps until all the nodes have checked. Detailed steps are shown below.
+
+|                   | complexity  |
+| :---------------: | :---------: |
+|  Worst case time  | O(N log(N)) |
+|  Best case time   |    O(N)     |
+| Average case time | O(N log(N)) |
+|       Space       |    O(1)     |
+
+> Although somewhat slower in practice on most machines than a well-implemented quicksort, it has the advantage of a more favorable worst-case O(n log n) runtime. Heapsort is an in-place algorithm, but it is not a stable sort [[1]].
+
+<p align="center">
+    <img src="./res/heapsort1.png" alt="step 1" width="75%"/>
+</p>
+
+<p align="center">
+    <img src="./res/heapsort2.png" alt="step 2" width="75%"/>
+</p>
+
+<p align="center">
+    <img src="./res/heapsort3.png" alt="step 3" width="75%"/>
+</p>
+
+<p align="center">
+    <img src="./res/heapsort4.png" alt="step 4" width="75%"/>
+</p>
+
+<p align="center">
+    <img src="./res/heapsort5.png" alt="step 5" width="75%"/>
+</p>
+
+<p align="center">
+    <img src="./res/heapsort6.png" alt="step 6" width="75%"/>
+</p>
+
+Exchange the max value with the node at the end. Then we fix the max value.
+
+<p align="center">
+    <img src="./res/heapsort7.png" alt="step 7" width="75%"/>
+</p>
+
+Sink the new root.
+
+<p align="center">
+    <img src="./res/heapsort8.png" alt="step 8" width="75%"/>
+</p>
+
+Repeat the above two steps, exchanging the max value with the node at the end. This time, we fix the max value on the left of the previous fixed node.
+
+<p align="center">
+    <img src="./res/heapsort9.png" alt="step 9" width="75%"/>
+</p>
+
+Finish the loop when all the nodes have been fixed.
+
+<p align="center">
+    <img src="./res/heapsort10.png" alt="step 10" width="75%"/>
+</p>
+
+Check out [HeapSort.java].
 
 ## References
 
@@ -271,7 +401,8 @@ private void sort(T[] a, int lo, int hi) {
 [mergesort.java]: /main/src/main/java/com/catherine/sorting/MergeSort.java
 [mergesortbottomup.java]: /main/src/main/java/com/catherine/sorting/MergeSortBottomUp.java
 [quicksort.java]: /main/src/main/java/com/catherine/sorting/QuickSort.java
-
-```
-
-```
+[selection.java]: /main/src/main/java/com/catherine/sorting/impl/Selection.java
+[duplicatekeys.java]: /main/src/main/java/com/catherine/sorting/impl/DuplicateKeys.java
+[binaryheap.java]: /main/src/main/java/com/catherine/pq/BinaryHeap.java
+[heapsort.java]: /main/src/main/java/com/catherine/pq/HeapSort.java
+[1]: https://en.wikipedia.org/wiki/Heapsort

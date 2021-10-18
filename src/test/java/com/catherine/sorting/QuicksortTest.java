@@ -1,5 +1,7 @@
 package com.catherine.sorting;
 
+import com.catherine.sorting.impl.DuplicateKeys;
+import com.catherine.sorting.impl.Selection;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;
@@ -10,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author : Catherine
  */
-class QuickSortTest implements Settings {
+class QuicksortTest implements Settings {
 
     @Test
     void sort() {
@@ -25,14 +27,28 @@ class QuickSortTest implements Settings {
 
     @Test
     void selection() {
-        com.catherine.sorting.impl.QuickSort<String> strCtx = new com.catherine.sorting.impl.QuickSort<>();
+        Selection<String> strCtx = new Selection<>();
         int k = random(0, a1.length - 1);
         assertEquals(strCtx.selection(a1, k), sortedA1[k]);
 
 
-        com.catherine.sorting.impl.QuickSort<Integer> intCtx = new com.catherine.sorting.impl.QuickSort<>();
+        Selection<Integer> intCtx = new Selection<>();
         k = random(0, a2.length - 1);
         assertEquals(intCtx.selection(a2, k), sortedA2[k]);
+    }
+
+    @Test
+    void duplicateKeys() {
+        DuplicateKeys<String> strCtx = new DuplicateKeys<>();
+        strCtx.sort(a1);
+        assertArrayEquals(sortedA1, a1);
+
+        DuplicateKeys<Integer> intCtx = new DuplicateKeys<>();
+        intCtx.sort(a2);
+        assertArrayEquals(sortedA2, a2);
+
+        intCtx.sort(a3);
+        assertArrayEquals(sortedA3, a3);
     }
 
     private int random(int min, int max) {

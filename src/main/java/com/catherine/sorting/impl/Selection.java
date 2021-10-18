@@ -8,10 +8,11 @@ import java.util.List;
  * @author : Catherine
  * <p>
  * <h1>Selection</h1>
+ * <h2>Quicksort</h2>
  * Given an array of N items, find a kth smallest item.
  * E.g., given a = {1, 3, 6, 4, 5} and k = 3, the answer is 4.
  */
-public class QuickSort<T extends Comparable<? super T>> {
+public class Selection<T extends Comparable<? super T>> {
 
     /**
      * Instead of having two pointers i and j as we use in quicksort,
