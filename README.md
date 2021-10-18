@@ -1,10 +1,10 @@
 # Algorithms
 
-## Table of contents
+## Table of Contents
 
 - [Algorithms](#algorithms)
-  - [Table of contents](#table-of-contents)
-  - [Dynamic connectivity](#dynamic-connectivity)
+  - [Table of Contents](#table-of-contents)
+  - [Dynamic Connectivity](#dynamic-connectivity)
     - [Quick Find - An eager approach](#quick-find---an-eager-approach)
     - [Quick Union - A lazy approach](#quick-union---a-lazy-approach)
     - [Improving quick find and quick union](#improving-quick-find-and-quick-union)
@@ -26,7 +26,7 @@
     - [Heap Sort](#heap-sort-1)
   - [References](#references)
 
-## Dynamic connectivity
+## Dynamic Connectivity
 
 Given a set of N objects. A union-find class includes:
 
@@ -396,13 +396,13 @@ Check out [HeapSort.java].
 
 [algorithms, part 1]: https://www.coursera.org/learn/algorithms-part1/home/welcome
 [programming assignment: percolation]: https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php
-[stacks]: ./main/src/main/java/com/catherine/stacks/
-[queues]: ./main/src/main/java/com/catherine/queues/
-[mergesort.java]: /main/src/main/java/com/catherine/sorting/MergeSort.java
-[mergesortbottomup.java]: /main/src/main/java/com/catherine/sorting/MergeSortBottomUp.java
-[quicksort.java]: /main/src/main/java/com/catherine/sorting/QuickSort.java
-[selection.java]: /main/src/main/java/com/catherine/sorting/impl/Selection.java
-[duplicatekeys.java]: /main/src/main/java/com/catherine/sorting/impl/DuplicateKeys.java
-[binaryheap.java]: /main/src/main/java/com/catherine/pq/BinaryHeap.java
-[heapsort.java]: /main/src/main/java/com/catherine/pq/HeapSort.java
+[stacks]: ./src/main/java/com/catherine/stacks/
+[queues]: ./src/main/java/com/catherine/queues/
+[mergesort.java]: ./src/main/java/com/catherine/sorting/MergeSort.java
+[mergesortbottomup.java]: ./src/main/java/com/catherine/sorting/MergeSortBottomUp.java
+[quicksort.java]: ./src/main/java/com/catherine/sorting/QuickSort.java
+[selection.java]: ./src/main/java/com/catherine/sorting/impl/Selection.java
+[duplicatekeys.java]: ./src/main/java/com/catherine/sorting/impl/DuplicateKeys.java
+[binaryheap.java]: ./src/main/java/com/catherine/pq/BinaryHeap.java
+[heapsort.java]: ./src/main/java/com/catherine/pq/HeapSort.java
 [1]: https://en.wikipedia.org/wiki/Heapsort
