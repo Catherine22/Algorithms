@@ -24,6 +24,10 @@
   - [Priority Queues](#priority-queues)
     - [Binary Heaps](#binary-heaps)
     - [Heap Sort](#heap-sort-1)
+  - [Balanced Search Trees](#balanced-search-trees)
+    - [2-3 Search Trees](#2-3-search-trees)
+    - [Red-Black BSTs](#red-black-bsts)
+    - [B-Trees](#b-trees)
   - [References](#references)
 
 ## Dynamic Connectivity
@@ -307,19 +311,19 @@ Check out [DuplicateKeys.java]
     <img src="./res/binary_heaps.png" alt="binary heaps" width="75%"/>
 </p>
 
-**Proposition**:
+**_Proposition_**
 
 -   Largest key is a[1], which is root of binary tree.
 -   Parent of node at k is at k/2.
 -   Children of node at k are at 2k and 2k+1.
 
-**Promotion in a heap**:
+**_Promotion in a heap_**
 
 Scenario: Child's key becomes larger key than its parent's key.
 
 To eliminate the violation, we have to exchange the key in the child with the key in the parent. After that exchange, check if the parent's key is larger than its parent. Finally, we repeat the exchange up to the root.
 
-**Demotion in a heap**:
+**_Demotion in a heap_**
 
 Scenario: Parent's key becomes smaller than one (or both) of its children's.
 
@@ -390,11 +394,114 @@ Finish the loop when all the nodes have been fixed.
 
 Check out [HeapSort.java].
 
+## Balanced Search Trees
+
+### 2-3 Search Trees
+
+A 2-3 tree allows 1 or 2 keys per node:
+
+-   2-node: 1 key, 2 children
+-   3-node: 2 keys, 3 children
+
+When a 2-3 tree is perfectly balanced, it suggests that every path from the root to a null link has the same length.
+
+<p align="center">
+    <img src="./res/2-3_tree.png" alt="2-3 tree" width="75%"/>
+</p>
+
+As the properties of the 2-3 tree, we know that a node can have at most three children, filling with two keys for each. Since the 2-3 tree is sorted, a right child must be larger than its siblings on the left, so do the keys. A one-key node is greater than its left child but smaller than its right child. A two-key node works as follows: left child < left key < median child < right key < right child.
+
+**_Search_**
+
+A search function starts from the root and goes down, comparing the target with the current node.
+
+**_Insert_**
+
+Traversing from the root as the search function does and reach to the bottom of the tree. There are two possible scenarios to handle when adding a key to an existed node as follows:
+
+1.  **Adding a key to a one-key node**: Replacing that 2-node with 3-node, placing the key on the left if it is smaller than another key and vice versa.
+2.  **Adding a key to a two-key node:**: We first have to temporarily merge that key to a 3-node even though it breaches the 2-3 tree policy. Then we pass the middle key in that 4-node up to its parent. Finally, we make sure the parent and its children comply with the rules of the 2-3 tree. Here are some examples:
+
+E.g. Inserting Z
+
+<p align="center">
+    <img src="./res/2-3_tree_insert1.png" alt="Insert" width="75%"/>
+</p>
+
+E.g. Inserting L
+
+<p align="center">
+    <img src="./res/2-3_tree_insert21.png" alt="Insert 1" width="75%"/>
+</p>
+<p align="center">
+    <img src="./res/2-3_tree_insert22.png" alt="Insert 2" width="75%"/>
+</p>
+<p align="center">
+    <img src="./res/2-3_tree_insert23.png" alt="Insert 3" width="75%"/>
+</p>
+
+### Red-Black BSTs
+
+A red-black binary search tree is a simple way to implement the 2-3 three, which represents a 2-3 tree as a BST. The illustrations below are left-leaning red-black BSTs.
+
+<p align="center">
+    <img src="./res/red-black_BST1.png" alt="Red-Black BST" width="75%"/>
+</p>
+<p align="center">
+    <img src="./res/red-black_BST2.png" alt="Red-Black BST" width="75%"/>
+</p>
+<p align="center">
+    <img src="./res/red-black_BST3.png" alt="Red-Black BST" width="75%"/>
+</p>
+
+-   If the link between two nodes is red, they are representations of a two-key node in the 2-3 tree.
+
+**_Rotate left_**
+
+Orient a (temporarily) right-leaning red link to lean left.
+
+<p align="center">
+    <img src="./res/rl_before.png" alt="Rotate" width="75%"/>
+</p>
+<p align="center">
+    <img src="./res/rl_after.png" alt="Rotate" width="75%"/>
+</p>
+
+**_Rotate right_**
+
+Orient a left-leaning red link to (temporarily) lean right.
+
+<p align="center">
+    <img src="./res/rr_before.png" alt="Rotate" width="75%"/>
+</p>
+<p align="center">
+    <img src="./res/rr_after.png" alt="Rotate" width="75%"/>
+</p>
+
+**_Flip colours_**
+
+When we have a temporary 4-node as a 2-3 tree, we need to flip colours.
+
+<p align="center">
+    <img src="./res/fc_before.png" alt="Rotate" width="75%"/>
+</p>
+<p align="center">
+    <img src="./res/fc_after.png" alt="Rotate" width="75%"/>
+</p>
+
+[LLRBTree.java] shows how to implement insertion for the LLRB tree.
+
+### B-Trees
+
 ## References
 
 -   [Algorithms, Part 1]
+-   [Algorithms, Part 2]
+-   [Google Java Style Guide]
 
 [algorithms, part 1]: https://www.coursera.org/learn/algorithms-part1/home/welcome
+[algorithms, part 2]: https://www.coursera.org/learn/algorithms-part2/home/welcome
+[google java style guide]: https://google.github.io/styleguide/javaguide.html
 [programming assignment: percolation]: https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php
 [stacks]: ./src/main/java/com/catherine/stacks/
 [queues]: ./src/main/java/com/catherine/queues/
@@ -405,4 +512,5 @@ Check out [HeapSort.java].
 [duplicatekeys.java]: ./src/main/java/com/catherine/sorting/impl/DuplicateKeys.java
 [binaryheap.java]: ./src/main/java/com/catherine/pq/BinaryHeap.java
 [heapsort.java]: ./src/main/java/com/catherine/pq/HeapSort.java
+[llrbtree.java]: ./src/main/java/com/catherine/trees/LLRBTree.java
 [1]: https://en.wikipedia.org/wiki/Heapsort
