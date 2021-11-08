@@ -2,13 +2,13 @@ package com.catherine.pq;
 
 /**
  * @author : Catherine
+ * An implementation of symbol table
  */
 public class FrequencyCounter {
     public int cal(int minlen, String[] array) {
         ST<String, Integer> st = new ST<>();
 
-        for (int i = 0; i < array.length; i++) {
-            String word = array[i];
+        for (String word : array) {
             if (word.length() < minlen) {
                 continue; // ignore short strings
             }
