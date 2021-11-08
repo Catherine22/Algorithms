@@ -4,6 +4,7 @@
 
 - [Algorithms](#algorithms)
   - [Table of Contents](#table-of-contents)
+  - [Equals](#equals)
   - [Dynamic Connectivity](#dynamic-connectivity)
     - [Quick Find - An eager approach](#quick-find---an-eager-approach)
     - [Quick Union - A lazy approach](#quick-union---a-lazy-approach)
@@ -24,11 +25,73 @@
   - [Priority Queues](#priority-queues)
     - [Binary Heaps](#binary-heaps)
     - [Heap Sort](#heap-sort-1)
+    - [Symbol Tables](#symbol-tables)
   - [Balanced Search Trees](#balanced-search-trees)
     - [2-3 Search Trees](#2-3-search-trees)
     - [Red-Black BSTs](#red-black-bsts)
-    - [B-Trees](#b-trees)
+    - [1d Range Search, One Dimensional Range Search](#1d-range-search-one-dimensional-range-search)
+  - [Hash Tables](#hash-tables)
   - [References](#references)
+
+## Equals
+
+In Java, all classes inherit a method `equals()`. For any references x, y and z, they must hit the following criteria:
+
+1. Reflective: `x.equals(x)` is true.
+2. Symmetric: `x.equals(y)` iff `y.equals(x)`
+3. Transitive: If `x.equals(y)` and `y.equals(z)`, then `x.equals(z)`.
+4. Non-null: `x.equals(null)` is false.
+
+Best practices:
+
+1. No need to use calculated fields that depend on other fields.
+2. Compare fields most likely to differ first.
+3. Make `compareTo()` consistent with `equals()`. I.e., `x.equals(y)` iff `x.compareTo(y) == 0`
+
+`x == y` is equivalent to `x.equals(y)` when x and y are primitive types. Otherwise, user-defined types should be careful. Below is an example.
+
+```Java
+public final class Date implements Comparable<Date> {
+    private final int day;
+    private final int month;
+    private final int year;
+
+    public boolean equals(Object y) {
+        if (y == this) {
+            return true;
+        }
+
+        if (y == null) {
+            return false;
+        }
+
+        // Object must be in the same class (religion: getClass() vs instanceof())
+        if (y.getClass() != this.getClass()) {
+            return false;
+        }
+
+        // Case is guaranteed to succeed
+        Date that = (Date) y;
+
+        // Check if all the significant fields are all the same
+        if (this.day != that.day) {
+            return false;
+        }
+
+        if (this.month != that.month) {
+            return false;
+        }
+
+        if (this.year != that.year) {
+            return false;
+        }
+
+        return true;
+    }
+}
+```
+
+If x and y are arrays, the above rules should apply to each entry.
 
 ## Dynamic Connectivity
 
@@ -394,6 +457,10 @@ Finish the loop when all the nodes have been fixed.
 
 Check out [HeapSort.java].
 
+### Symbol Tables
+
+A symbol table is a key-value pair abstraction. For example, DNS lookup uses URLs as keys and IP addresses as values. In Java, a symbol table implements associative array abstraction, which associates one value with each key.
+
 ## Balanced Search Trees
 
 ### 2-3 Search Trees
@@ -491,7 +558,17 @@ When we have a temporary 4-node as a 2-3 tree, we need to flip colours.
 
 [LLRBTree.java] shows how to implement insertion for the LLRB tree.
 
-### B-Trees
+### 1d Range Search, One Dimensional Range Search
+
+## Hash Tables
+
+Below are the criteria of hashing:
+
+-   A hash function
+-   Equality test: A method for checking whether two keys are equal.
+-   Collision resolution: A collision is when two keys hash to the same index. We need an algorithm to handle collisions.
+
+Therefore, a hash is a classic time-space tradeoff. Without space limitation, a trivial hash function uses a key as an index. Without time limitation, a trivial collision resolution uses sequential search. In the real world, the ideological goal is to ensure the hash function is efficiently computable and every table index equally likely for each key.
 
 ## References
 
