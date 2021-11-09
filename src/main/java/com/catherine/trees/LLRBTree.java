@@ -24,7 +24,7 @@ public class LLRBTree<T extends Comparable<? super T>, Object> {
         }
 
         Node(T key, Object val) {
-            this(null, null, RED);
+            this(key, val, RED);
         }
 
         Node(T key, Object val, boolean color) {

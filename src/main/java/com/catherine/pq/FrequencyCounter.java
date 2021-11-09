@@ -26,7 +26,7 @@ public class FrequencyCounter {
                 max = word;
             }
         }
-        System.out.printf("max: %d \n", st.get(max));
+//        System.out.printf("max: %d \n", st.get(max));
         return st.get(max);
     }
 }
